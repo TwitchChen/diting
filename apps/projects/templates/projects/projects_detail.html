@@ -4,9 +4,9 @@
 
 {% block custom_head_css_js %}
     <link href="{% static 'css/plugins/select2/select2.min.css' %}" rel="stylesheet">
-    <link href="{% static "css/plugins/sweetalert/sweetalert.css" %}" rel="stylesheet">
+    <link href="{% static 'css/plugins/sweetalert/sweetalert.css' %}" rel="stylesheet">
     <script src="{% static 'js/plugins/select2/select2.full.min.js' %}"></script>
-    <script src="{% static "js/plugins/sweetalert/sweetalert.min.js" %}"></script>
+    <script src="{% static 'js/plugins/sweetalert/sweetalert.min.js' %}"></script>
 {% endblock %}
 {% block content %}
     <div class="wrapper wrapper-content animated fadeInRight">
@@ -24,7 +24,7 @@
                             </li>
 
                             <li class="pull-right">
-                                <a class="btn btn-outline {% if request.user != "admin" %} btn-danger btn-delete-user {% else %} disabled {% endif %}">
+                                <a class="btn btn-outline {% if request.user != 'admin' %} btn-danger btn-delete-user {% else %} disabled {% endif %}">
                                     <i class="fa fa-trash-o"></i>{% trans 'Delete' %}
                                 </a>
                             </li>

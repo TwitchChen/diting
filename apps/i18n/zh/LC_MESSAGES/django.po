@@ -2889,3 +2889,35 @@ msgstr "密钥更新"
 
 #~ msgid "Task has been send, seen left asset status"
 #~ msgstr "任务已下发，查看左侧资产状态"
+
+#: templates/_nav.html:29
+msgid "Projects"
+msgstr "项目管理"
+
+#: templates/_nav.html:32
+msgid "Projects list"
+msgstr "项目列表"
+
+#: templates/_nav.html:35
+msgid "Projects publish"
+msgstr "项目发布"
+
+#: projects/projects_list.html:6
+msgid "Create Projects"
+msgstr "创建项目"
+
+#: projects/projects_publish.html:12
+msgid "Project Name"
+msgstr "项目名"
+
+#: projects/projects_publish.html:13
+msgid "Principal"
+msgstr "负责人"
+
+#: projects/projects_publish.html:35
+msgid "Publish"
+msgstr "推送"
+
+#: projects/projects_publish.html:39
+msgid "Roll back"
+msgstr "回滚"

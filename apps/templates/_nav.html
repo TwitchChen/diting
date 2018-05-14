@@ -26,16 +26,16 @@
 
 <li id="projects">
     <a>
-        <i class="fa fa-inbox" style="width: 14px"></i> <span class="nav-label">项目管理</span><span class="fa arrow"></span>
+        <i class="fa fa-inbox" style="width: 14px"></i> <span class="nav-label">{% trans 'Projects' %}</span><span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level">
-        <li id="project"><a href="{% url 'projects:projects-list' %}">项目列表</a></li>
+        <li id="project"><a href="{% url 'projects:projects-list' %}">{% trans 'Projects list' %}</a></li>
+        <li id="publish"><a href="{% url 'projects:projects-publish' %}">{% trans 'Projects publish' %}</a></li>
     </ul>
 </li>
 
 <li id="perms">
     <a href="#"><i class="fa fa-edit" style="width: 14px"></i> <span class="nav-label">{% trans 'Perms' %}</span><span class="fa arrow"></span></a>
-
 </li>
 
 <li id="settings">

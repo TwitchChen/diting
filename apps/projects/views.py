@@ -45,7 +45,7 @@ class ProjectsListView(AdminUserRequiredMixin, TemplateView):
         context = super().get_context_data(**kwargs)
         context.update({
             'app': _('Projects'),
-            'action': _('Projects'),
+            'action': _('Projects list'),
         })
         return context
 
@@ -99,3 +99,27 @@ class ProjectsDetailView(AdminUserRequiredMixin, DetailView):
         }
         kwargs.update(context)
         return super().get_context_data(**kwargs)
+
+
+#Start Project Publish
+class ProjectsPublishListView(AdminUserRequiredMixin, TemplateView):
+    template_name = 'projects/projects_publish_list.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'app': _('Projects'),
+            'action': _('Projects publish'),
+        })
+        return context
+
+class ProjectsPublishPushView(AdminUserRequiredMixin, TemplateView):
+    template_name = 'projects/projects_publish.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context.update({
+            'app': _('Projects'),
+            'action': _('Projects publish Log'),
+        })
+        return context
