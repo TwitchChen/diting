@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load i18n %}
+{% block custom_head_css_js %}
+    <script src="http://jenkins.fjf.com/static/2fef1d8f/scripts/hudson-behavior.js"></script>
+    <script src="http://jenkins.fjf.com/static/2fef1d8f/scripts/behavior.js"></script>
+    <script src='http://jenkins.fjf.com/adjuncts/2fef1d8f/lib/layout/breadcrumbs.js'></script>
+    <script src="http://jenkins.fjf.com/static/2fef1d8f/scripts/prototype.js"></script>
+    <script src="http://jenkins.fjf.com/static/2fef1d8f/scripts/yui/yahoo/yahoo-min.js"></script>
+    <script src="http://jenkins.fjf.com/descriptor/hudson.console.ExpandableDetailsNote/script.js"></script>
+{% endblock %}
+{% block content %}
+<div id="main-panel" class="ibox-content">
+        <a name="skip2content"></a>
+        <h1 class="build-caption page-headline">
+        <div class="build-caption-progress-container" style="float:right">
+            <table class="middle-align">
+                <tr>
+                    <td>进度:</td>
+                    <td class="build-caption-progress-bar">
+                        <table tooltip="预计剩余时间：" style="cursor:pointer" href="http://jenkins.fjf.com/view/DevOps/job/html-fbdsc-admin-web/23/console" class="progress-bar ">
+                            <tbody>
+                            <tr>
+                                <td style="width:7%;" class="progress-bar-done"></td>
+                                <td style="width:93%" class="progress-bar-left"></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <a onclick="if(confirm(&quot;Are you sure you want to abort html-fbdsc-admin-web #23?&quot;))new Ajax.Request(&quot;stop&quot;); return false;" href="stop" class="stop-button-link"><img src="http://jenkins.fjf.com/static/2fef1d8f/images/16x16/stop.png" style="width: 16px; height: 16px; " class="icon-stop icon-sm" /></a>
+                    </td>
+                </tr>
+            </table>
+        </div>
+            <img src="http://jenkins.fjf.com/static/2fef1d8f/images/48x48/blue_anime.gif" alt="In progress" tooltip="In progress" style="width: 48px; height: 48px; " class="icon-blue-anime icon-xlg" />
+            控制台输出
+        </h1>
+        <link rel='stylesheet' type='text/css' href='http://jenkins.fjf.com/descriptor/hudson.tasks._ant.AntOutcomeNote/style.css' />
+        <script src='http://jenkins.fjf.com/descriptor/hudson.tasks._ant.AntTargetNote/script.js'></script>
+        <script src='http://jenkins.fjf.com/descriptor/hudson.console.ExpandableDetailsNote/script.js'></script>
+        <link rel='stylesheet' type='text/css' href='http://jenkins.fjf.com/descriptor/hudson.console.ExpandableDetailsNote/style.css' />
+        <pre id="out" class="console-output white-bg"></pre>
+        <div id="spinner"><img src="http://jenkins.fjf.com/static/2fef1d8f/images/spinner.gif" alt="" />
+        </div>
+</div>
+{% endblock %}
+{% block custom_foot_js %}
+<script type="text/javascript">
+    var scroller = new AutoScroller(document.body);
+	    function fetchNext(e,href) {
+        var headers = {};
+        if (e.consoleAnnotator!=undefined)
+          headers["X-ConsoleAnnotator"] = e.consoleAnnotator;
+	      new Ajax.Request(href,{
+	          method: "get",
+	          parameters: {"start":e.fetchedBytes},
+              requestHeaders: headers,
+	          onComplete: function(rsp,_) {
+
+              var stickToBottom = scroller.isSticking();
+              var text = rsp.responseText;
+              if(text!="") {
+                var p = document.createElement("DIV");
+                e.appendChild(p); // Needs to be first for IE
+                // Use "outerHTML" for IE; workaround for:
+                // http://www.quirksmode.org/bugreports/archives/2004/11/innerhtml_and_t.html
+                if (p.outerHTML) {
+                  p.outerHTML = '<pre class="white-bg">'+text+'</pre>';
+                  p = e.lastChild;
+                }
+                else p.innerHTML = text;
+                Behaviour.applySubtree(p);
+                ElementResizeTracker.fireResizeCheck();
+                if(stickToBottom) scroller.scrollToBottom();
+              }
+
+              e.fetchedBytes     = rsp.getResponseHeader("X-Text-Size");
+              e.consoleAnnotator = rsp.getResponseHeader("X-ConsoleAnnotator");
+	            if(rsp.getResponseHeader("X-More-Data")=="true")
+	              setTimeout(function(){fetchNext(e,href);},1000);
+	          else
+	              $("spinner").style.display = "none";
+	          }
+	      });
+	    }
+
+	  $("out").fetchedBytes = 0;
+	  fetchNext($("out"),"http://127.0.0.1:8000/api/projects/v1/projects/log/");
+</script>
+{% endblock %}
