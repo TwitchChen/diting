@@ -35,6 +35,11 @@
                         <form enctype="multipart/form-data" method="post" class="form-horizontal" action="" >
                             {% csrf_token %}
                             {% bootstrap_field form.name layout="horizontal" %}
+				<div class="form-group">
+			   <label class="col-md-2 control-label" for="id_domain">域名</label>
+				<div class="col-md-9"><input type="text" name="domain" maxlength="50" class="form-control" placeholder="域名" title="" required="" id="id_domain" data-cip-id="id_domain" value="testops.fjf.com">
+</div>
+				</div>
                             {% bootstrap_field form.dever layout="horizontal" %}
                             {% bootstrap_field form.apps layout="horizontal" %}
                             {% bootstrap_field form.rely layout="horizontal" %}

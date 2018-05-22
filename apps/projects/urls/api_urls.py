@@ -16,7 +16,8 @@ urlpatterns = [
                 api.ProjectsUpdateGroupApi.as_view(), name='projects-update-group'),
         url(r'^v1/projects/(?P<pk>[0-9a-zA-Z\-]{36})/users/$',
                 api.ProjectsUpdateUserApi.as_view(), name='projects-update-user'),
-        url(r'v1/projects/log/$', api.gettextlog, name='projects-publibsh-log'),
+        url(r'v1/projects/log/$', api.GetbuildLog, name='projects-publish-log'),
+        url(r'v1/projects/push/$', api.ProjectPublishPush, name='projects-publish-push'),
 ]
 
 urlpatterns += router.urls

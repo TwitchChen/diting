@@ -2902,22 +2902,38 @@ msgstr "项目列表"
 msgid "Projects publish"
 msgstr "项目发布"
 
-#: projects/projects_list.html:6
+#: projects/templates/projects/projects_list.html:6
 msgid "Create Projects"
 msgstr "创建项目"
 
-#: projects/projects_publish.html:12
+#: projects/templates/projects/projects_publish_list.html:62
 msgid "Project Name"
 msgstr "项目名"
 
-#: projects/projects_publish.html:13
+#: projects/templates/projects/projects_publish_list.html:63
 msgid "Principal"
 msgstr "负责人"
 
-#: projects/projects_publish.html:35
+#: projects/templates/projects/projects_publish_list.html:84
 msgid "Publish"
 msgstr "推送"
 
-#: projects/projects_publish.html:39
+#: projects/templates/projects/projects_publish_list.html:85
 msgid "Roll back"
 msgstr "回滚"
+
+#: projects/templates/projects/projects_publish_list.html:86
+msgid "Log"
+msgstr "日志"
+
+#: projects/views.py:81
+msgid "Update projects"
+msgstr "更新项目"
+
+#: projects/projects_list.html:52
+msgid "Edit"
+msgstr "编辑" 
+
+#: projects/views.py:123
+msgid "Projects publish Log"
+msgstr "推送日志"

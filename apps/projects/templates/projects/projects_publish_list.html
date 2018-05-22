@@ -6,25 +6,15 @@
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <form class="form-horizontal" role="form" method="post" onsubmit="return " action="/task/add">
+            <form class="form-horizontal" role="form" method="post" onsubmit="return " action="{% url 'api-projects:projects-publish-push' %}">{% csrf_token %}
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                   <h4 class="modal-title" id="myLargeModalLabel">准备推送</h4>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <!--<div class="col-sm-8">-->
-                            <!--<select class="form-control" name="operation">-->
-                                <!--<option>1</option>-->
-                                <!--<option>1</option>-->
-                                <!--<option>1</option>-->
-                            <!--</select>-->
-                        <!--</div>-->
-                        <!--<div class="col-sm-2">-->
-                            <!--<label>选择操作</label>-->
-                        <!--</div>-->
                         <div class="col-sm-8">
-                            <input type="text" class="form-control" id="inputproject" name="project" placeholder="html-fbdsc-admin-web" disabled>
+                            <input type="text" class="form-control" id="interject" name="project" value="" readonly />
                         </div>
                         <div class="col-sm-2">
                             <label>项目名</label>
@@ -32,7 +22,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-8">
-                            <select class="form-control" id="runenv" name="runenv">
+                            <select class="form-control" name="runenv">
                                 <option>test</option>
                                 <option>stage</option>
                                 <option>product</option>
@@ -44,7 +34,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-sm-8">
-                            <select class="form-control" id="hostip" name="hostip">
+                            <select class="form-control" name="podnum">
                                 <option>1</option>
                                 <option>2</option>
                                 <option>4</option>
@@ -56,7 +46,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal" id="testxxx">取消</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                     <button type="submit" class="btn btn-primary">提交</button>
                 </div>
             </form>
@@ -91,9 +81,9 @@ function initTable() {
                 $(td).html(detail_btn.replace("{{ DEFAULT_PK }}", rowData.id));
              }},
             {targets: 3, createdCell: function (td, cellData, rowData) {
-                var push_btn = '<button class="btn btn-xs btn-info" data-toggle="modal" data-target="#myModal" id="btn_push">{% trans "Publish" %}</button>'
-                var roll_btn = '<a href="{% url "api-projects:projects-publibsh-log" %}" class="btn btn-xs btn-danger m-l-xs btn_user_delete">{% trans "Roll back" %}</a>'.replace('00000000-0000-0000-0000-000000000000', cellData);
-                var log_btn = '<a href="{% url "projects:projects-push" pk=DEFAULT_PK %}" class="btn btn-primary btn-xs m-l-xs">{% trans "Log" %}</a>'.replace('00000000-0000-0000-0000-000000000000', cellData);
+                var push_btn = '<button class="btn btn-xs btn-info" data-toggle="modal" data-target="#myModal" onclick="getProject()">{% trans "Publish" %}</button>'
+                var roll_btn = '<a href="{% url "api-projects:projects-publish-log" %}" class="btn btn-xs btn-danger m-l-xs btn_user_delete">{% trans "Roll back" %}</a>'.replace('00000000-0000-0000-0000-000000000000', cellData);
+                var log_btn = '<button class="btn btn-primary btn-xs m-l-xs" onclick="SkipLogUrl()">{% trans "Log" %}</button>'
                 $(td).html(push_btn + roll_btn + log_btn)
              }}],
         ajax_url: '{% url "api-projects:projects-list" %}',
@@ -112,6 +102,18 @@ $(document).ready(function(){
         console.log(value)
     });
 });
+function getProject(){
+  $("#publish_list_table tr").off("click").on("click",(function() {
+    var ProjectName=$(this).children('td').eq(1).text();
+    $("#interject").val(ProjectName);
+  }));
+}
+function SkipLogUrl(){
+  $("#publish_list_table tr").off("click").on("click",(function() {
+    var ProjectName=$(this).children('td').eq(1).text();
+    var url = "{% url "projects:projects-log" %}" + "?project=" + ProjectName;
+    window.location.href=url;
+  }));
+}
 </script>
 {% endblock %}
-
