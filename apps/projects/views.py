@@ -72,7 +72,7 @@ class ProjectsCreateView(AdminUserRequiredMixin, SuccessMessageMixin, CreateView
 class ProjectsUpdateView(AdminUserRequiredMixin, SuccessMessageMixin, UpdateView):
     model = Projects
     form_class = forms.ProjectsUpdateForm
-    template_name = 'projects/Projects_create_update.html'
+    template_name = 'projects/projects_create_update.html'
     context_object_name = 'projects_object'
     success_url = reverse_lazy('projects:projects-list')
     success_message = update_success_msg

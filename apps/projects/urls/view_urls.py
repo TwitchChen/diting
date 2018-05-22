@@ -16,5 +16,5 @@ urlpatterns = [
     url(r'^project/(?P<pk>[0-9a-zA-Z\-]{36})/update$', views.ProjectsUpdateView.as_view(), name='projects-update'),
     url(r'^project/(?P<pk>[0-9a-zA-Z\-]{36})$', views.ProjectsDetailView.as_view(), name='projects-detail'),
     url(r'^publish$', views.ProjectsPublishListView.as_view(), name='projects-publish'),
-    url(r'^publish/(?P<pk>[0-9a-zA-Z\-]{36})/push$', views.ProjectsPublishPushView.as_view(), name='projects-push'),
+    url(r'^publish/publish-log/$', views.ProjectsPublishPushView.as_view(), name='projects-log'),
 ]
